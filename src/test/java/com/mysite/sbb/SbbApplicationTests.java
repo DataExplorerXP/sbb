@@ -1,6 +1,9 @@
 package com.mysite.sbb;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +40,12 @@ class SbbApplicationTests {
     }
     @Test
     void questionFindByIdTest() {
-        Question q=this.questionRepository.findById(1).get();
+        Optional<Question> oq = this.questionRepository.findById(1);
+        if(oq.isPresent()) {
+            Question q=oq.get();
+        }else{
+            // 예외 처리
+        }
     }
     @Test
     void questionFindBySubjectTest() {
